@@ -32,8 +32,8 @@ def getInterlayerDistance(frame):
             TopLayer.append(atom)
         else:
             BottomLayer.append(atom)
-    TOPLowAtom = sorted(TopLayer)[0]
-    BOTHighAtom = sorted(BottomLayer)[-1]
+    TOPLowAtom = sorted(Atoms(TopLayer).positions[:,2])[0]
+    BOTHighAtom = sorted(Atoms(BottomLayer).positions[:,2])[-1]
     Interlayer_Z = TOPLowAtom - BOTHighAtom
     return Interlayer_Z
 
@@ -49,4 +49,4 @@ with open("InterD.dat", 'a') as handle:
 
 # Feed the frame to the above functions to get separation of layers and perform sanity checks
         Interlayer_D = getInterlayerDistance(frame)
-        handle.write(f'{Interlayer_D:<14.8f}')
+        handle.write(f'{Interlayer_D:<14.8f}\n')
