@@ -61,10 +61,11 @@ with open("InterD.dat", 'a') as handle:
 
 # Convert Bohr to Å for ease of use later.
     for frame in input:
-        frame.set_cell(frame.cell * Bohr)
-        frame.set_positions(frame.positions * Bohr)
-
+        if len(frame) == 272:
+            frame.set_cell(frame.cell * Bohr)
+            frame.set_positions(frame.positions * Bohr)
+            
 # Feed the frame to the above functions to get separation of layers and perform sanity checks
-        Top, Bot = getLayers(frame)
-        InterC = getInterlayerDistance(Top, Bot)
-        handle.write(f'{InterC:<14.8f}\n')
+            Top, Bot = getLayers(frame)
+            InterC = getInterlayerDistance(Top, Bot)
+            handle.write(f'{InterC:<14.8f}\n')
